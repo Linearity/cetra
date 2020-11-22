@@ -1,0 +1,86 @@
+/*
+for (i = 0; i < tetmesh.tet_count; i++)
+{
+	// tet is guilty until proven innocent
+	tetmesh.markTet(i);
+	
+	// check every tet for having a vertex inside the mesh
+	if (	   point_inside_mesh((*tetmesh.getVertexPointer((*tetmesh.getTetPointer(i))[0])).data, mq_surface)
+		|| point_inside_mesh((*tetmesh.getVertexPointer((*tetmesh.getTetPointer(i))[1])).data, mq_surface)
+		|| point_inside_mesh((*tetmesh.getVertexPointer((*tetmesh.getTetPointer(i))[2])).data, mq_surface)
+		|| point_inside_mesh((*tetmesh.getVertexPointer((*tetmesh.getTetPointer(i))[3])).data, mq_surface)	)
+	{
+		tetmesh.unmarkTet(i);
+	}
+}
+
+int tet_block_indices[24];
+for (i = 0; i < nx; i++)
+{
+	for (j = 0; j < ny; j++)
+	{
+		for (k = 0; k < nz; k++)
+		{
+			tetmesh.computeIncidentTets(getBccCenterVertex(i, j, k, tetmesh.vertex_array, nx, ny, nz));
+			tetmesh.getIncidentTets(getBccCenterVertex(i, j, k, tetmesh.vertex_array, nx, ny, nz), tet_block_indices);
+			
+			for (l = 0; l < 24; l++)
+			{
+				tet_l = tetmesh.getTetPointer(tet_block_indices[l]);
+				tet_radius = tetmesh.getCircumradius(tet_l);
+				
+				// if a tet incident to the center_vertex intersects the surface,
+				for (triIter = s.triangles.begin(); triIter != s.triangles.end(); triIter++)
+				{								
+					tri_radius = tri_circumradii[triIter - s.triangles.begin()];
+					// *** epsilon parameter here ***
+					if (	  mag(tetmesh.getCircumcenter(tet_l) - tri_circumcenters[triIter - s.triangles.begin()])
+						< CULLING_TEST_DISTANCE_RATIO * (tet_radius + tri_radius)	)
+					{
+						// if this tet intersects this triangle
+						if 	(    tetmesh.pointInTet(s.meshPts[(*triIter)[0]], tet_l)
+							  || tetmesh.pointInTet(s.meshPts[(*triIter)[1]], tet_l)
+							  || tetmesh.pointInTet(s.meshPts[(*triIter)[2]], tet_l)
+							  
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[0])).data, (*tetmesh.getVertexPointer((*tet_l)[1])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[0])).data, (*tetmesh.getVertexPointer((*tet_l)[2])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[0])).data, (*tetmesh.getVertexPointer((*tet_l)[3])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[1])).data, (*tetmesh.getVertexPointer((*tet_l)[2])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[1])).data, (*tetmesh.getVertexPointer((*tet_l)[3])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  || segment_intersects_mesh((*tetmesh.getVertexPointer((*tet_l)[2])).data, (*tetmesh.getVertexPointer((*tet_l)[3])).data, mq_surface, &mq_dummy_int, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl, &mq_dummy_dbl)
+							  
+							  )
+						{
+							// if this is true for even one triangle...
+							break;
+						}
+					}
+				}
+				
+				// ...then keep breaking out of these loops...
+				if (triIter != s.triangles.end())
+				{
+					break;
+				}
+			}
+			
+			// ...and unmark every tet in this structure!
+			if (l < 24)
+			{
+				for (l = 0; l < 24; l++)
+				{
+					tetmesh.unmarkTet(tet_block_indices[l]);
+				}
+			}
+			
+			if (verbose && ((i * nx * ny + j * ny + k) != 0) && (((i * nx * ny + j * ny + k) % 100) == 0))
+			{
+				printf("\rCutting out extranneous tetrahedra...                          ");
+				fflush(stdout);
+				printf("\rCutting out extranneous tetrahedra...%d tet structures checked...", (i * nx * ny + j * ny + k));
+				fflush(stdout);
+			}
+		}
+	}
+}
+*/
