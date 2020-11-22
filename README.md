@@ -11,10 +11,10 @@ This repository contains the core meshing code, mostly free of the unnecessary f
 and scripts used in the research. Unfortunately it's also free of some necessary
 files as well, namely:
 
-    * [mesh_query][meshquery], for some geometric queries during meshing
-    * [El Topo][eltopo], for continuous collision detection
-    * [cxxtest][cxxtest], for unit testing
-    * some header files from the lab's common codebase
+* [mesh_query][meshquery], for some geometric queries during meshing
+* [El Topo][eltopo], for continuous collision detection
+* [cxxtest][cxxtest], for unit testing
+* some header files from the lab's common codebase
 
 This means the old makefile doesn't work. 😩
 
